@@ -30,6 +30,7 @@ jobs:
         id: deployment
         uses: actions/deploy-pages@v4
       - name: Notify Slack channel
+        if: secrets.SLACK_HOOK_URL
         run: |
           curl -X POST -H 'Content-type: application/json' \
           --data "{'text':'Successful deployment of *${GITHUB_REPOSITORY}* \nGitHub Pages URL: ${{ steps.deployment.outputs.page_url }}'}" \
